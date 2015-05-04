@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="org.component.analysis">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- common dbcp 数据库连接池配置信息-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" p:url="${jdbc.url}"
+          p:driverClassName="${jdbc.driverClassName}" p:username="${jdbc.username}" p:password="${jdbc.password}"
+          p:initialSize="${jdbc.initialSize}" p:maxActive="${jdbc.maxActive}" p:maxIdle="${jdbc.maxIdle}"
+          p:minIdle="${jdbc.minIdle}" p:maxWait="${jdbc.maxWait}" p:validationQuery="${jdbc.validationQuery}"
+          p:testOnBorrow="${jdbc.testOnBorrow}" p:testOnReturn="${jdbc.testOnReturn}"
+          p:testWhileIdle="${jdbc.testWhileIdle}"
+          p:timeBetweenEvictionRunsMillis="${jdbc.timeBetweenEvictionRunsMillis}"
+          p:minEvictableIdleTimeMillis="${jdbc.minEvictableIdleTimeMillis}" p:removeAbandoned="${jdbc.removeAbandoned}"
+          p:removeAbandonedTimeout="${jdbc.removeAbandonedTimeout}"/>
+
+    <!-- mybatis文件配置，扫描所有mapper文件 -->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:mybatis/mybatis-config.xml"
+          p:mapperLocations="classpath:mybatis/mapper/*.xml"/>
+    <!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
+
+    <!-- spring与mybatis整合配置，扫描所有dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="org.component.analysis.web.dao"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+
+    <!-- 对数据源进行事务管理 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+
+    <!-- 事物切面配置 -->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="save*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="del*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="remove*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="mod*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="servicePoint" expression="execution (* org.component.analysis.web.service.*(..))"/>
+        <aop:advisor advice-ref="advice" pointcut-ref="servicePoint"/>
+    </aop:config>
+</beans>
