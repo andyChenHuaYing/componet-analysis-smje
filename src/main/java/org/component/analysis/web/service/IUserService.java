@@ -5,4 +5,5 @@ package org.component.analysis.web.service;
  * Version 1.0-SNAPSHOT<br>
  */
 public interface IUserService {
+    int selectUserCount();
 }

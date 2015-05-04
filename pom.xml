@@ -7,6 +7,7 @@
     <groupId>org.component.analysis.smje</groupId>
     <artifactId>component-analysis-smje</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <java-version>1.7</java-version>
@@ -16,6 +17,7 @@
         <org.slf4j-version>1.6.1</org.slf4j-version>
         <org.mybatis>3.2.8</org.mybatis>
         <org.mybatis.spring>1.2.2</org.mybatis.spring>
+        <org.aspectj>1.7.4</org.aspectj>
         <common.dbcp>1.4</common.dbcp>
     </properties>
 
@@ -73,6 +75,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${org.springframework-version}</version>
+        </dependency>
+
+        <!--aspectJ-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.5</version>
         </dependency>
 
         <!-- Mybatis-->
@@ -136,17 +145,6 @@
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jstl-impl</artifactId>
             <version>1.2</version>
             <exclusions>
                 <exclusion>
