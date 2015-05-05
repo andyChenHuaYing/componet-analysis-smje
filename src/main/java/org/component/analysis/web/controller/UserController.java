@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Version 1.0-SNAPSHOT<br>
  */
 @Controller("userController")
-@RequestMapping("/user")
 public class UserController {
 
 //    @Autowired
 //    @Qualifier("userService")
 //    private IUserService userService;
 
-    @RequestMapping("/countUser")
+    @RequestMapping("/user")
     public String userCount() {
         System.out.println("++++++++++++++++++++++++++++++++");
         return "home";

@@ -2,7 +2,6 @@ package org.component.analysis.web.service.impl;
 
 import org.component.analysis.web.dao.IUserDAO;
 import org.component.analysis.web.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements IUserService{
 
-    @Autowired
+//    @Autowired
     private IUserDAO userDAO;
 
     public int selectUserCount() {

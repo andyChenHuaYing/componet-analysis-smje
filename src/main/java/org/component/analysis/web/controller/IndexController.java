@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Version 1.0-SNAPSHOT<br>
  */
 @Controller
-@RequestMapping("/index.spr")
 public class IndexController {
 
-    @RequestMapping(params = "method=index")
+    @RequestMapping("/hello.spr")
     public String index() {
-        return "error/400";
+        System.out.println("============");
+        return "home";
     }
 }

@@ -9,41 +9,41 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <!-- 引入资源文件 -->
+    <!-- 引入资源文件
     <context:property-placeholder location="classpath:properties/jdbc-config.properties"/>
 
     <context:component-scan base-package="org.component.analysis">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+    </context:component-scan>-->
 
-    <!-- common dbcp 数据库连接池配置信息-->
+    <!-- common dbcp 数据库连接池配置信息
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" p:url="${jdbc.url}"
           p:driverClassName="${jdbc.driverClassName}" p:username="${jdbc.username}" p:password="${jdbc.password}"
           p:minEvictableIdleTimeMillis="${jdbc.minEvictableIdleTimeMillis}" p:removeAbandoned="${jdbc.removeAbandoned}"
           p:maxActive="${jdbc.maxActive}" p:maxIdle="${jdbc.maxIdle}" p:initialSize="${jdbc.initialSize}"
           p:minIdle="${jdbc.minIdle}" p:maxWait="${jdbc.maxWait}" p:validationQuery="${jdbc.validationQuery}"
           p:timeBetweenEvictionRunsMillis="${jdbc.timeBetweenEvictionRunsMillis}"
-          p:removeAbandonedTimeout="${jdbc.removeAbandonedTimeout}"/>
+          p:removeAbandonedTimeout="${jdbc.removeAbandonedTimeout}"/>-->
 
-    <!-- mybatis文件配置，扫描所有mapper文件 -->
+    <!-- mybatis文件配置，扫描所有mapper文件
     <bean id="sqlSessionFactory"
           class="org.mybatis.spring.SqlSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:mybatis/mybatis-config.xml"
-          p:mapperLocations="classpath:mybatis/mapper/UserMapper.xml"/>
+          p:mapperLocations="classpath:mybatis/mapper/UserMapper.xml"/> -->
     <!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
 
-    <!-- spring与mybatis整合配置，扫描所有dao -->
+    <!-- spring与mybatis整合配置，扫描所有dao
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:basePackage="org.component.analysis.web.dao"
-          p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"/> -->
 
-    <!-- 对数据源进行事务管理 -->
+    <!-- 对数据源进行事务管理
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          p:dataSource-ref="dataSource"/>
+          p:dataSource-ref="dataSource"/>-->
 
-    <!-- 事物切面配置 -->
+    <!-- 事物切面配置
     <tx:advice id="advice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
@@ -60,5 +60,5 @@
     <aop:config>
         <aop:pointcut id="servicePoint" expression="execution (* org.component.analysis.web.service..*(..))"/>
         <aop:advisor advice-ref="advice" pointcut-ref="servicePoint"/>
-    </aop:config>
+    </aop:config>-->
 </beans>
