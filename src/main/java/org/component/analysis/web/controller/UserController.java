@@ -16,7 +16,8 @@ public class UserController {
 //    private IUserService userService;
 
     @RequestMapping("/countUser")
-    public void userCount() {
-//        System.out.println(this.userService.selectUserCount());
+    public String userCount() {
+        System.out.println("++++++++++++++++++++++++++++++++");
+        return "home";
     }
 }

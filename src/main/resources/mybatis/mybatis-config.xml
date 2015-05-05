@@ -5,9 +5,9 @@
 <configuration>
     <!-- 命名空间 -->
     <typeAliases>
-        <typeAlias alias="User" type="cn.springmvc.model.User"/>
+        <typeAlias alias="User" type="org.component.analysis.web.model.User"/>
     </typeAliases>
 
     <!-- 映射map -->
-    <mappers></mappers>
+    <mappers/>
 </configuration>

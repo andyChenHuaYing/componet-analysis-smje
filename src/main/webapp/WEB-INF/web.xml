@@ -22,7 +22,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:spring/springMVC-root-context.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
@@ -65,4 +65,32 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<!-- error handle page -->
+	<error-page>
+		<!-- wrong path -->
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<!-- no privilege -->
+		<error-code>405</error-code>
+		<location>/WEB-INF/views/error/405.jsp</location>
+	</error-page>
+	<error-page>
+		<!-- internal error -->
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<!--internal exception-->
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/views/error/400.jsp</location>
+	</error-page>
+
+	<!--welcome page list-->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
