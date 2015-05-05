@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-<h1>home</h1>
+<h1>PersonCount: ${personCount}</h1>
 </body>
 </html>

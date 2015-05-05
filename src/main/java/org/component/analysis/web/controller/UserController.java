@@ -1,6 +1,10 @@
 package org.component.analysis.web.controller;
 
+import org.component.analysis.web.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller("userController")
 public class UserController {
 
-//    @Autowired
-//    @Qualifier("userService")
-//    private IUserService userService;
+    @Autowired
+    @Qualifier("userServiceImpl")
+    private IUserService userService;
 
     @RequestMapping("/user")
-    public String userCount() {
-        System.out.println("++++++++++++++++++++++++++++++++");
+    public String userCount(Model model) {
+        model.addAttribute("personCount", this.userService.selectUserCount());
         return "home";
     }
 }
