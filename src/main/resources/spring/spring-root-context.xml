@@ -22,7 +22,8 @@
           p:minEvictableIdleTimeMillis="${jdbc.minEvictableIdleTimeMillis}" p:removeAbandoned="${jdbc.removeAbandoned}"
           p:maxActive="${jdbc.maxActive}" p:maxIdle="${jdbc.maxIdle}" p:initialSize="${jdbc.initialSize}"
           p:minIdle="${jdbc.minIdle}" p:maxWait="${jdbc.maxWait}" p:validationQuery="${jdbc.validationQuery}"
-          p:timeBetweenEvictionRunsMillis="${jdbc.timeBetweenEvictionRunsMillis}"
+          p:timeBetweenEvictionRunsMillis="${jdbc.timeBetweenEvictionRunsMillis}" p:testOnBorrow="${jdbc.testOnBorrow}"
+          p:testOnReturn="${jdbc.testOnReturn}" p:testWhileIdle="${jdbc.testWhileIdle}"
           p:removeAbandonedTimeout="${jdbc.removeAbandonedTimeout}"/>
 
     <!-- mybatis文件配置，扫描所有mapper文件-->
